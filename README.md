@@ -9,7 +9,7 @@ Scrapes proctored student attendance from the staff portal, stores it in Postgre
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        College LAN                              │
+│                                                                 │
 │                                                                 │
 │  ┌──────────────┐    ┌──────────────────┐    ┌──────────────┐  │
 │  │   Scraper    │───▶│  Backend API     │◀───│  Frontend    │  │
