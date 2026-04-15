@@ -7,7 +7,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.database import engine, Base, SessionLocal
+from backend.database import engine, Base, SessionLocal, init_db
 from backend.models import Student
 from backend.routers import health, teachers, students, attendance, alerts
 from backend.config import API_HOST, API_PORT, ATTENDANCE_THRESHOLD, EMAILS_CSV_PATH
@@ -73,6 +73,7 @@ def _sync_student_emails() -> None:
 async def lifespan(app: FastAPI):
     logger.info("Starting MSRIT Attendance API...")
     logger.info(f"Attendance threshold: {ATTENDANCE_THRESHOLD}%")
+    init_db()
     _sync_student_emails()
     yield
     logger.info("Shutting down MSRIT Attendance API.")

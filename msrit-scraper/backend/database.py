@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 from backend.config import DATABASE_URL
 
@@ -17,3 +17,13 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def init_db() -> None:
+    """Apply lightweight, idempotent migrations needed by the backend."""
+    with engine.connect() as conn:
+        # Ensure student_email exists for alerting and email sync
+        conn.execute(
+            text("ALTER TABLE students ADD COLUMN IF NOT EXISTS student_email TEXT")
+        )
+        conn.commit()

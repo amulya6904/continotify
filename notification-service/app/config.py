@@ -1,4 +1,5 @@
 import os
+from urllib.parse import quote_plus
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,7 +18,9 @@ DB_NAME     = os.getenv("DB_NAME", "msrit_attendance")
 DB_USER     = os.getenv("DB_USER", "postgres")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 
-DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+# URL-encode password to safely handle special characters like @
+_db_password_escaped = quote_plus(DB_PASSWORD)
+DATABASE_URL = f"postgresql://{DB_USER}:{_db_password_escaped}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 # Service
 SERVICE_PORT = int(os.getenv("SERVICE_PORT", 8001))

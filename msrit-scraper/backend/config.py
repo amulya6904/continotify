@@ -1,4 +1,5 @@
 import os
+from urllib.parse import quote_plus
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -18,6 +19,8 @@ NOTIFICATION_SERVICE_URL = os.getenv("NOTIFICATION_SERVICE_URL", "http://localho
 
 EMAILS_CSV_PATH = os.getenv("EMAILS_CSV_PATH", "emails.csv")
 
+# URL-encode password to safely handle special characters like @
+_db_password_escaped = quote_plus(DB_PASSWORD)
 DATABASE_URL = (
-    f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    f"postgresql://{DB_USER}:{_db_password_escaped}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
