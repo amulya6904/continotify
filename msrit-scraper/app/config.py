@@ -11,6 +11,10 @@ PORTAL_URL = os.getenv("PORTAL_URL", "https://staff.msrit.edu")
 LOGIN_TIMEOUT = int(os.getenv("LOGIN_TIMEOUT", 15))
 SCRAPE_TIMEOUT = int(os.getenv("SCRAPE_TIMEOUT", 10))
 HEADLESS = os.getenv("HEADLESS", "true").lower() == "true"
+DEBUG_CARD_DUMP = os.getenv("DEBUG_CARD_DUMP", "false").lower() == "true"
+DEBUG_CARD_DUMP_PATH = os.getenv("DEBUG_CARD_DUMP_PATH", "debug_card.html")
+DEBUG_POPUP_DUMP = os.getenv("DEBUG_POPUP_DUMP", "false").lower() == "true"
+DEBUG_POPUP_DUMP_PATH = os.getenv("DEBUG_POPUP_DUMP_PATH", "debug_popup.html")
 
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = int(os.getenv("DB_PORT", 5432))
